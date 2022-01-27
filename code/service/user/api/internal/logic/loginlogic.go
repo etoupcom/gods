@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"mall/common/errorx"
 	"time"
 
 	"mall/common/jwtx"
@@ -32,7 +33,7 @@ func (l *LoginLogic) Login(req types.LoginRequest) (resp *types.LoginResponse, e
 		Password: req.Password,
 	})
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("密码错误")
 	}
 
 	now := time.Now().Unix()
@@ -40,7 +41,7 @@ func (l *LoginLogic) Login(req types.LoginRequest) (resp *types.LoginResponse, e
 
 	accessToken, err := jwtx.GetToken(l.svcCtx.Config.Auth.AccessSecret, now, accessExpire, res.Id)
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewDefaultError("令牌获取失败")
 	}
 
 	return &types.LoginResponse{

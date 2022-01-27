@@ -16,8 +16,8 @@ import (
 var (
 	payFieldNames          = builder.RawFieldNames(&Pay{})
 	payRows                = strings.Join(payFieldNames, ",")
-	payRowsExpectAutoSet   = strings.Join(stringx.Remove(payFieldNames, "`id`", "`created_at`", "`updated_at`"), ",")
-	payRowsWithPlaceHolder = strings.Join(stringx.Remove(payFieldNames, "`id`", "`created_at`", "`updated_at`"), "=?,") + "=?"
+	payRowsExpectAutoSet   = strings.Join(stringx.Remove(payFieldNames, "`id`", "`create_time`", "`update_time`"), ",")
+	payRowsWithPlaceHolder = strings.Join(stringx.Remove(payFieldNames, "`id`", "`create_time`", "`update_time`"), "=?,") + "=?"
 
 	cachePayIdPrefix  = "cache:pay:id:"
 	cachePayOidPrefix = "cache:pay:oid:"
@@ -38,14 +38,14 @@ type (
 	}
 
 	Pay struct {
-		Id        int64     `db:"id"`
-		Uid       int64     `db:"uid"`    // 用户ID
-		Oid       int64     `db:"oid"`    // 订单ID
-		Amount    int64     `db:"amount"` // 产品金额
-		Source    int64     `db:"source"` // 支付方式
-		Status    int64     `db:"status"` // 支付状态
-		CreatedAt time.Time `db:"created_at"`
-		UpdatedAt time.Time `db:"updated_at"`
+		Id         int64     `db:"id"`
+		Uid        int64     `db:"uid"`    // 用户ID
+		Oid        int64     `db:"oid"`    // 订单ID
+		Amount     int64     `db:"amount"` // 产品金额
+		Source     int64     `db:"source"` // 支付方式
+		Status     int64     `db:"status"` // 支付状态
+		CreateTime time.Time `db:"create_time"`
+		UpdateTime time.Time `db:"update_time"`
 	}
 )
 

@@ -4,8 +4,8 @@ CREATE TABLE `order` (
 	`pid` bigint unsigned NOT NULL DEFAULT '0' COMMENT '产品ID',
 	`amount` int(10) unsigned NOT NULL DEFAULT '0'  COMMENT '订单金额',
 	`status` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '订单状态',
-	`created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-	`updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	`create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+	`update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	PRIMARY KEY (`id`),
 	KEY `idx_uid` (`uid`),
 	KEY `idx_pid` (`pid`)

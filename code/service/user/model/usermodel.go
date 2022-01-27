@@ -16,8 +16,8 @@ import (
 var (
 	userFieldNames          = builder.RawFieldNames(&User{})
 	userRows                = strings.Join(userFieldNames, ",")
-	userRowsExpectAutoSet   = strings.Join(stringx.Remove(userFieldNames, "`id`", "`created_at`", "`updated_at`"), ",")
-	userRowsWithPlaceHolder = strings.Join(stringx.Remove(userFieldNames, "`id`", "`created_at`", "`updated_at`"), "=?,") + "=?"
+	userRowsExpectAutoSet   = strings.Join(stringx.Remove(userFieldNames, "`id`", "`create_time`", "`update_time`"), ",")
+	userRowsWithPlaceHolder = strings.Join(stringx.Remove(userFieldNames, "`id`", "`create_time`", "`update_time`"), "=?,") + "=?"
 
 	cacheUserIdPrefix     = "cache:user:id:"
 	cacheUserMobilePrefix = "cache:user:mobile:"
@@ -38,13 +38,13 @@ type (
 	}
 
 	User struct {
-		Id        int64     `db:"id"`
-		Name      string    `db:"name"`     // 用户姓名
-		Gender    int64     `db:"gender"`   // 用户性别
-		Mobile    string    `db:"mobile"`   // 用户电话
-		Password  string    `db:"password"` // 用户密码
-		CreatedAt time.Time `db:"created_at"`
-		UpdatedAt time.Time `db:"updated_at"`
+		Id         int64     `db:"id"`
+		Name       string    `db:"name"`     // 用户姓名
+		Gender     int64     `db:"gender"`   // 用户性别
+		Mobile     string    `db:"mobile"`   // 用户电话
+		Password   string    `db:"password"` // 用户密码
+		CreateTime time.Time `db:"create_time"`
+		UpdateTime time.Time `db:"update_time"`
 	}
 )
 

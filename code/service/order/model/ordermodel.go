@@ -16,8 +16,8 @@ import (
 var (
 	orderFieldNames          = builder.RawFieldNames(&Order{})
 	orderRows                = strings.Join(orderFieldNames, ",")
-	orderRowsExpectAutoSet   = strings.Join(stringx.Remove(orderFieldNames, "`id`", "`created_at`", "`updated_at`"), ",")
-	orderRowsWithPlaceHolder = strings.Join(stringx.Remove(orderFieldNames, "`id`", "`created_at`", "`updated_at`"), "=?,") + "=?"
+	orderRowsExpectAutoSet   = strings.Join(stringx.Remove(orderFieldNames, "`id`", "`create_time`", "`update_time`"), ",")
+	orderRowsWithPlaceHolder = strings.Join(stringx.Remove(orderFieldNames, "`id`", "`create_time`", "`update_time`"), "=?,") + "=?"
 
 	cacheOrderIdPrefix = "cache:order:id:"
 )
@@ -37,13 +37,13 @@ type (
 	}
 
 	Order struct {
-		Id        int64     `db:"id"`
-		Uid       int64     `db:"uid"`    // 用户ID
-		Pid       int64     `db:"pid"`    // 产品ID
-		Amount    int64     `db:"amount"` // 订单金额
-		Status    int64     `db:"status"` // 订单状态
-		CreatedAt time.Time `db:"created_at"`
-		UpdatedAt time.Time `db:"updated_at"`
+		Id         int64     `db:"id"`
+		Uid        int64     `db:"uid"`    // 用户ID
+		Pid        int64     `db:"pid"`    // 产品ID
+		Amount     int64     `db:"amount"` // 订单金额
+		Status     int64     `db:"status"` // 订单状态
+		CreateTime time.Time `db:"create_time"`
+		UpdateTime time.Time `db:"update_time"`
 	}
 )
 

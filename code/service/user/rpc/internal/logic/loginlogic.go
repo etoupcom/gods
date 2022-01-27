@@ -2,14 +2,13 @@ package logic
 
 import (
 	"context"
-
+	"google.golang.org/grpc/status"
 	"mall/common/cryptx"
 	"mall/service/user/model"
 	"mall/service/user/rpc/internal/svc"
 	"mall/service/user/rpc/user"
 
 	"github.com/tal-tech/go-zero/core/logx"
-	"google.golang.org/grpc/status"
 )
 
 type LoginLogic struct {
@@ -33,7 +32,7 @@ func (l *LoginLogic) Login(in *user.LoginRequest) (*user.LoginResponse, error) {
 		if err == model.ErrNotFound {
 			return nil, status.Error(100, "用户不存在")
 		}
-		return nil, status.Error(500, err.Error())
+		return nil, status.Error(100, err.Error())
 	}
 
 	// 判断密码是否正确

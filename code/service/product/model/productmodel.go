@@ -16,8 +16,8 @@ import (
 var (
 	productFieldNames          = builder.RawFieldNames(&Product{})
 	productRows                = strings.Join(productFieldNames, ",")
-	productRowsExpectAutoSet   = strings.Join(stringx.Remove(productFieldNames, "`id`", "`created_at`", "`updated_at`"), ",")
-	productRowsWithPlaceHolder = strings.Join(stringx.Remove(productFieldNames, "`id`", "`created_at`", "`updated_at`"), "=?,") + "=?"
+	productRowsExpectAutoSet   = strings.Join(stringx.Remove(productFieldNames, "`id`", "`create_time`", "`update_time`"), ",")
+	productRowsWithPlaceHolder = strings.Join(stringx.Remove(productFieldNames, "`id`", "`create_time`", "`update_time`"), "=?,") + "=?"
 
 	cacheProductIdPrefix = "cache:product:id:"
 )
@@ -36,14 +36,14 @@ type (
 	}
 
 	Product struct {
-		Id        int64     `db:"id"`
-		Name      string    `db:"name"`   // 产品名称
-		Desc      string    `db:"desc"`   // 产品描述
-		Stock     int64     `db:"stock"`  // 产品库存
-		Amount    int64     `db:"amount"` // 产品金额
-		Status    int64     `db:"status"` // 产品状态
-		CreatedAt time.Time `db:"created_at"`
-		UpdatedAt time.Time `db:"updated_at"`
+		Id         int64     `db:"id"`
+		Name       string    `db:"name"`   // 产品名称
+		Desc       string    `db:"desc"`   // 产品描述
+		Stock      int64     `db:"stock"`  // 产品库存
+		Amount     int64     `db:"amount"` // 产品金额
+		Status     int64     `db:"status"` // 产品状态
+		CreateTime time.Time `db:"create_time"`
+		UpdateTime time.Time `db:"update_time"`
 	}
 )
 
